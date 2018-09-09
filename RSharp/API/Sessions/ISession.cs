@@ -21,11 +21,6 @@ namespace RSharp.API.Sessions
         string[] LoginDetails { get; set; }
 
         /// <summary>
-        /// Gets the encryption that's associated with the session.
-        /// </summary>
-        ISAACCipher ISAAC { get; set; }
-
-        /// <summary>
         /// Writes the packet asynchronously.
         /// </summary>
         /// <param name="serverPacket">The packet to write.</param>
@@ -43,5 +38,11 @@ namespace RSharp.API.Sessions
         /// Flushes the queue that's associated with the session.
         /// </summary>
         void Flush();
+
+        /// <summary>
+        /// Closes the client asynchronously.
+        /// </summary>
+        /// <returns>Closes the client upon task completion.</returns>
+        Task CloseAsync();
     }
 }

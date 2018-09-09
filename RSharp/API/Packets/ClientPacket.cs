@@ -15,5 +15,8 @@ namespace RSharp.API.Packets
             Size = size;
             _content = content;
         }
+
+        public int ReadUByteS() =>
+            128 - _content.ReadByte() & 0xff;
     }
 }

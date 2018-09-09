@@ -26,8 +26,7 @@ namespace RSharp.Network
         protected override void InitChannel(ISocketChannel channel)
         {
             channel.Pipeline
-                .AddLast("encoder", new Encoder())
-                .AddLast("decoder", new ConnectionDecoder(_playerController, _sessionController))
+                .AddLast("decoder", new HandshakeDecoder(_playerController, _sessionController))
                 .AddLast("handler", new NetworkHandler(_handleProvider, _sessionController));
         }
     }

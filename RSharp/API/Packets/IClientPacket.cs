@@ -11,5 +11,7 @@
         /// Gets the size of the incoming packet.
         /// </summary>
         int Size { get; }
+
+        int ReadUByteS();
     }
 }

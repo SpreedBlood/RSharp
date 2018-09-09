@@ -1,8 +1,8 @@
 ﻿using DotNetty.Transport.Channels;
 using RSharp.API.Handles;
-using RSharp.API.Network;
 using RSharp.API.Packets;
 using RSharp.API.Sessions;
+using System;
 
 namespace RSharp.Network
 {

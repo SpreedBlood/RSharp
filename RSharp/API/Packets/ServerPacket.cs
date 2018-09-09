@@ -1,36 +1,53 @@
 ﻿using DotNetty.Buffers;
-using RSharp.Network.Codec;
+using System.Text;
 
 namespace RSharp.API.Packets
 {
     public class ServerPacket
     {
         public IByteBuffer Buffer { get; }
-        private readonly int _opCode;
+        public int OpCode { get; }
 
         public ServerPacket()
-            : this(-1)
         {
-
+            OpCode = -1;
+            Buffer = Unpooled.Buffer();
         }
 
         public ServerPacket(int opCode)
-            : this(opCode, Unpooled.Buffer())
         {
-        }
+            OpCode = opCode;
+            Buffer = Unpooled.Buffer();
 
-        public ServerPacket(int opCode, IByteBuffer buffer)
-        {
-            _opCode = opCode;
-            Buffer = buffer;
+            Buffer.WriteByte(opCode);
         }
 
         protected void WriteLong(long value) => Buffer.WriteLong(value);
 
-        protected void WriteByte(byte value) => Buffer.WriteByte(value);
+        protected void WriteByte(int value) => Buffer.WriteByte(value);
 
-        protected void WriteByteA(byte value) => Buffer.WriteByte(value + 128);
+        protected void WriteByteAdd(int value) => Buffer.WriteByte(value + 128);
 
-        protected void WriteEncByte(byte value, ISAACCipher cipher) => Buffer.WriteByte(value + cipher.GetNextValue());
+        protected void WriteByteSubtract(int value) => Buffer.WriteByte(128 - value);
+
+        protected void WriteByteNegate(int value) => Buffer.WriteByte(-value);
+
+        protected void WriteShortAddBig(int value)
+        {
+            Buffer.WriteByte(value >> 8);
+            Buffer.WriteByte(value + 128);
+        }
+
+        protected void WriteShortAddLittle(byte value)
+        {
+            Buffer.WriteByte(value + 128);
+            Buffer.WriteByte(value >> 8);
+        }
+
+        protected void WriteString(string value)
+        {
+            Buffer.WriteBytes(Encoding.Default.GetBytes(value));
+            Buffer.WriteByte(10);
+        }
     }
 }

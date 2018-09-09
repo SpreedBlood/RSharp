@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DotNetty.Buffers;
 using DotNetty.Codecs;
 using DotNetty.Transport.Channels;
@@ -21,30 +20,55 @@ namespace RSharp.Network.Codec
 
         protected override void Decode(IChannelHandlerContext context, IByteBuffer input, List<object> output)
         {
-            if (input.ReadableBytes >= 1)
+            if (opCode == -1)
             {
-                opCode = input.ReadUByte();
-                opCode = (opCode - _cipher.GetNextValue()) & 0xFF;
-                size = _packetLengths[opCode];
-            }
-            else
-            {
-                return;
+                if (input.ReadableBytes > 0)
+                {
+                    opCode = input.ReadByte();
+                    opCode = opCode - _cipher.GetNextValue() & 0xFF;
+                    size = _packetLengths[opCode];
+                }
+                else
+                {
+                    return;
+                }
             }
 
-            if (input.ReadableBytes >= 1)
+            if (size == -1)
             {
-                size = input.ReadByte() & 0xFF;
+                if (input.ReadableBytes > 0)
+                {
+                    size = input.ReadByte() & 0xFF;
+                }
+                else
+                {
+                    return;
+                }
             }
-            else
+
+            if (size == -2)
             {
-                return;
+                if (input.ReadableBytes > 1)
+                {
+                    size = input.ReadUnsignedShort();
+                }
+                else
+                {
+                    return;
+                }
             }
 
             if (input.ReadableBytes >= size)
             {
                 output.Add(new ClientPacket(opCode, size, input.ReadBytes(size)));
+                Reset();
             }
+        }
+
+        private void Reset()
+        {
+            opCode = -1;
+            size = -1;
         }
 
         private static readonly int[] _packetLengths =

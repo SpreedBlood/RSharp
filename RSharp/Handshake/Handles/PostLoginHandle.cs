@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using RSharp.API.Handles;
 using RSharp.API.Players;
 using RSharp.API.Sessions;
+using RSharp.Chat.Handles.Composers;
 using RSharp.Handshake.Handles.Composers;
 
 namespace RSharp.Handshake.Handles
@@ -24,10 +25,12 @@ namespace RSharp.Handshake.Handles
             if (player != null)
             {
                 session.Player = player;
+                await session.WriteAndFlushAsync(new IsMemberComposer(player.Id, true)); //TODO: Members!
             }
-
-            await session.WriteAsync(new InitializeFrameComposer(249, session.ISAAC));
-            await session.WriteAsync(new IsMemberComposer(false)); //TODO: Members!
+            else
+            {
+                await session.CloseAsync();
+            }
         }
     }
 }

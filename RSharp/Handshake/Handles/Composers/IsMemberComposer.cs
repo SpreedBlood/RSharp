@@ -4,9 +4,11 @@ namespace RSharp.Handshake.Handles.Composers
 {
     internal class IsMemberComposer : ServerPacket
     {
-        public IsMemberComposer(bool isMember)
+        public IsMemberComposer(uint playerId, bool isMember)
+            : base(249)
         {
-            WriteByte(isMember ? (byte)1 : (byte)0);
+            WriteByteAdd((byte)(isMember ? 1 : 0));
+            WriteShortAddBig((int)playerId);
         }
     }
 }

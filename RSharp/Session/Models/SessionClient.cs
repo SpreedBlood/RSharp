@@ -3,7 +3,6 @@ using DotNetty.Transport.Channels;
 using RSharp.API.Packets;
 using RSharp.API.Players;
 using RSharp.API.Sessions;
-using RSharp.Network.Codec;
 
 namespace RSharp.Session.Models
 {
@@ -11,7 +10,6 @@ namespace RSharp.Session.Models
     {
         public IPlayer Player { get; set; }
         public string[] LoginDetails { get; set; }
-        public ISAACCipher ISAAC { get; set; }
 
         private readonly IChannelHandlerContext _channel;
 
@@ -25,5 +23,7 @@ namespace RSharp.Session.Models
         public Task WriteAndFlushAsync(ServerPacket serverPacket) => _channel.WriteAndFlushAsync(serverPacket);
 
         public void Flush() => _channel.Flush();
+
+        public Task CloseAsync() => _channel.CloseAsync();
     }
 }

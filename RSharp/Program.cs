@@ -2,6 +2,7 @@
 using RSharp.API;
 using RSharp.API.Handles;
 using RSharp.API.Network;
+using RSharp.Chat;
 using RSharp.Handshake;
 using RSharp.Network;
 using RSharp.Player;
@@ -23,7 +24,8 @@ namespace RSharp
                 new NetworkService(),
                 new HandshakeService(),
                 new PlayerService(),
-                new SessionService()
+                new SessionService(),
+                new ChatService()
             };
 
             IServiceCollection serviceCollection = new ServiceCollection();
