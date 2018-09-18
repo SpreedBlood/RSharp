@@ -9,7 +9,6 @@ namespace RSharp.Session.Models
     internal class SessionClient : ISession
     {
         public IPlayer Player { get; set; }
-        public string[] LoginDetails { get; set; }
 
         private readonly IChannelHandlerContext _channel;
 

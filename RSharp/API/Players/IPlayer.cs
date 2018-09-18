@@ -1,4 +1,7 @@
-﻿namespace RSharp.API.Players
+﻿using RSharp.API.Entity;
+using System.Collections.Generic;
+
+namespace RSharp.API.Players
 {
     public interface IPlayer
     {
@@ -16,5 +19,15 @@
         /// Gets the password of the player.
         /// </summary>
         string Password { get; set; }
+
+        /// <summary>
+        /// Gets the skills of the player.
+        /// </summary>
+        IList<ISkill> Skills { get; }
+
+        /// <summary>
+        /// Gets the current position of the player.
+        /// </summary>
+        IPosition Position { get; }
     }
 }

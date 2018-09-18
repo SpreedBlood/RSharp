@@ -1,6 +1,6 @@
 ﻿using RSharp.API.Packets;
 
-namespace RSharp.Handshake.Handles.Composers
+namespace RSharp.Player.Handles.Composers
 {
     internal class IsMemberComposer : ServerPacket
     {
@@ -8,7 +8,7 @@ namespace RSharp.Handshake.Handles.Composers
             : base(249)
         {
             WriteByteAdd((byte)(isMember ? 1 : 0));
-            WriteShortAddBig((int)playerId);
+            WriteBigShortAdd((int)playerId);
         }
     }
 }

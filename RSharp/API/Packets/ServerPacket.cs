@@ -32,16 +32,30 @@ namespace RSharp.API.Packets
 
         protected void WriteByteNegate(int value) => Buffer.WriteByte(-value);
 
-        protected void WriteShortAddBig(int value)
+        protected void WriteBigShort(int value)
+        {
+            Buffer.WriteByte(value >> 8);
+            Buffer.WriteByte(value);
+        }
+
+        protected void WriteBigShortAdd(int value)
         {
             Buffer.WriteByte(value >> 8);
             Buffer.WriteByte(value + 128);
         }
 
-        protected void WriteShortAddLittle(byte value)
+        protected void WriteLittleShortAdd(byte value)
         {
             Buffer.WriteByte(value + 128);
             Buffer.WriteByte(value >> 8);
+        }
+
+        protected void WriteMiddleInt(int value)
+        {
+            Buffer.WriteByte(value >> 8);
+            Buffer.WriteByte(value);
+            Buffer.WriteByte(value >> 28);
+            Buffer.WriteByte(value >> 16);
         }
 
         protected void WriteString(string value)

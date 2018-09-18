@@ -3,7 +3,6 @@ using RSharp.API;
 using RSharp.API.Handles;
 using RSharp.API.Network;
 using RSharp.Chat;
-using RSharp.Handshake;
 using RSharp.Network;
 using RSharp.Player;
 using RSharp.Session;
@@ -22,7 +21,6 @@ namespace RSharp
             IList<IService> services = new List<IService>
             {
                 new NetworkService(),
-                new HandshakeService(),
                 new PlayerService(),
                 new SessionService(),
                 new ChatService()

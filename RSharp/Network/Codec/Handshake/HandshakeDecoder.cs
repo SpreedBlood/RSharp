@@ -8,6 +8,7 @@ using RSharp.API.Handshake;
 using RSharp.API.Players;
 using RSharp.API.Sessions;
 using RSharp.Network.Codec.Packet;
+using RSharp.Player.Utils;
 
 namespace RSharp.Network.Codec
 {
@@ -130,17 +131,17 @@ namespace RSharp.Network.Codec
 
             if (_sessionController.TryGetSession(context.Channel.Id, out ISession session))
             {
-                string[] loginDetails = new string[2];
-                loginDetails[0] = username;
-                loginDetails[1] = password;
-                session.LoginDetails = loginDetails;
-
                 await context.WriteAndFlushAsync(new LoginSuccessComposer().Buffer);
 
                 context.Channel.Pipeline
                     .AddBefore("decoder", "packetEncoder", new PacketEncoder(outCipher))
                     .AddAfter("packetEncoder", "packetDecoder", new PacketDecoder(inCipher))
                     .Remove(this);
+
+                IPlayer player = await _playerController.GetPlayer(username, password);
+                session.Player = player;
+
+                await session.PostLogin();
             }
         }
 

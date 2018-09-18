@@ -2,7 +2,7 @@
 
 namespace RSharp.Chat.Handles.Composers
 {
-    public class SendChatComposer : ServerPacket
+    internal class SendChatComposer : ServerPacket
     {
         public SendChatComposer(string test)
             : base(253)

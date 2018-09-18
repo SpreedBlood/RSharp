@@ -1,6 +1,5 @@
 ﻿using RSharp.API.Packets;
 using RSharp.API.Players;
-using RSharp.Network.Codec;
 using System.Threading.Tasks;
 
 namespace RSharp.API.Sessions
@@ -12,13 +11,6 @@ namespace RSharp.API.Sessions
         /// until logged in.
         /// </summary>
         IPlayer Player { get; set; }
-
-        /// <summary>
-        /// Gets the login details of the player.
-        /// [0] = username,
-        /// [1] = password.
-        /// </summary>
-        string[] LoginDetails { get; set; }
 
         /// <summary>
         /// Writes the packet asynchronously.
