@@ -1,4 +1,5 @@
 ﻿using RSharp.API.Players;
+using RSharp.API.Players.Skill;
 
 namespace RSharp.Player.Models.Components.Skill
 {

@@ -1,4 +1,6 @@
 ﻿using RSharp.API.Entity;
+using RSharp.API.Players.Equipment;
+using RSharp.API.Players.Skill;
 using System.Collections.Generic;
 
 namespace RSharp.API.Players
@@ -24,6 +26,11 @@ namespace RSharp.API.Players
         /// Gets the skills of the player.
         /// </summary>
         IList<ISkill> Skills { get; }
+
+        /// <summary>
+        /// Gets the players equipment.
+        /// </summary>
+        IList<IEquipment> Equipment { get; }
 
         /// <summary>
         /// Gets the current position of the player.

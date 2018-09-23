@@ -1,4 +1,4 @@
-﻿namespace RSharp.API.Players
+﻿namespace RSharp.API.Players.Skill
 {
     public static class SkillData
     {

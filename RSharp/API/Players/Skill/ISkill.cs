@@ -1,4 +1,4 @@
-﻿namespace RSharp.API.Players
+﻿namespace RSharp.API.Players.Skill
 {
     public interface ISkill
     {

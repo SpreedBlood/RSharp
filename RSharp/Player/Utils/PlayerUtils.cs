@@ -1,4 +1,5 @@
 ﻿using RSharp.API.Players;
+using RSharp.API.Players.Skill;
 using RSharp.API.Sessions;
 using RSharp.Chat.Handles.Composers;
 using RSharp.Interface.Handles.Composers;

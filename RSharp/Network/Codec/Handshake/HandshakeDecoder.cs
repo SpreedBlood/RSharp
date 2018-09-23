@@ -110,8 +110,8 @@ namespace RSharp.Network.Codec
 
             int uid = input.ReadInt();
 
-            string username = input.GetRS2String();
-            string password = input.GetRS2String();
+            string username = input.GetString();
+            string password = input.GetString();
             bool userExists = await _playerController.UserExists(username);
             if (userExists)
             {

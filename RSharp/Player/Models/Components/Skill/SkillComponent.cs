@@ -1,4 +1,4 @@
-﻿using RSharp.API.Players;
+﻿using RSharp.API.Players.Skill;
 using System.Collections.Generic;
 
 namespace RSharp.Player.Models.Components.Skill
@@ -11,7 +11,7 @@ namespace RSharp.Player.Models.Components.Skill
         {
             Skills = new List<ISkill>(SkillData.Amount);
 
-            //Iniitalizes the skills.
+            //Initalizes the skills.
             for (byte i = 0; i < SkillData.Amount; i++)
             {
                 Skills.Add(new Skill(i));

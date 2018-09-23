@@ -6,6 +6,8 @@ using RSharp.Chat;
 using RSharp.Network;
 using RSharp.Player;
 using RSharp.Session;
+using RSharp.Uv;
+using RSharp.World;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -18,12 +20,22 @@ namespace RSharp
 
         private Program()
         {
+            Loop loop = new Loop();
+            Timer timer = loop.NewTimer(() =>
+            {
+                Console.WriteLine(DateTime.Now);
+            });
+
+            timer.Start(0, 500);
+            loop.RunDefault();
+
             IList<IService> services = new List<IService>
             {
                 new NetworkService(),
                 new PlayerService(),
                 new SessionService(),
-                new ChatService()
+                new ChatService(),
+                new WorldService()
             };
 
             IServiceCollection serviceCollection = new ServiceCollection();

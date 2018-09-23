@@ -8,11 +8,11 @@ namespace RSharp.Network.Codec
         internal static int ReadUByte(this IByteBuffer buffer) =>
             buffer.ReadByte() & 0xff;
 
-        internal static string GetRS2String(this IByteBuffer buffer)
+        internal static string GetString(this IByteBuffer buffer)
         {
             StringBuilder stringBuilder = new StringBuilder();
             byte b;
-            while (buffer.IsReadable() && (b = buffer.ReadByte()) != 10)
+            while ((b = buffer.ReadByte()) != 10)
             {
                 stringBuilder.Append((char)b);
             }

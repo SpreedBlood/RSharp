@@ -1,5 +1,5 @@
 ﻿using RSharp.API.Packets;
-using RSharp.API.Players;
+using RSharp.API.Players.Skill;
 
 namespace RSharp.Player.Handles.Composers
 {
